@@ -1,36 +1,26 @@
-int icmp(const void* x, const void* y){
-	int a=*(int*)x;
-	int b=*(int*)y;
-	return (a > b) - (b > a);
-}
-int ccmp(const void* x, const void* y){
-	unsigned char a=*(unsigned char*)x;
-	unsigned char b=*(unsigned char*)y;
-	return (a > b) - (b > a);
-}
-
-int lb(int* arr, int len, int target){
-	int l=0,r=len-1;
-	int last=-1;
-	while(l<=r){
-		int m=l+(r-l)/2;
-		int curr=arr[m];
-		if(curr==target){
-			last=m;
-			r=m-1;
-		}
-		else if(curr>target)
-			r=m-1;
-		else
-			l=m+1;
-	}
-	if(last==-1)return l;
-	else return last;
-}
-
-#include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include <stdio.h>
+int lb(int* arr, int len, int target){
+	int l = 0, r = len - 1;
+	while (l <= r) {
+		int m = l + (r - l) / 2;
+		if (arr[m] >= target)
+			r = m - 1;
+		else
+			l = m + 1;
+	}
+	return l;
+}
+int icmp(const void* x, const void* y) {
+	int a = *(int*)x;
+	int b = *(int*)y;
+	return (a > b) - (b > a);
+}
+int ccmp(const void* x, const void* y) {
+	unsigned char a = *(unsigned char*)x;
+	unsigned char b = *(unsigned char*)y;
+	return (a > b) - (b > a);
+}
 int main() {
 	int t, target;
 	scanf("%d%d", &t, &target);
