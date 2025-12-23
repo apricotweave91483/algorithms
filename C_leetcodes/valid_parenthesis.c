@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <string.h>
-// input just parenthesis, could do other types but it would be repetitive. This is a learning exercise
 int main() {
 	char all[10001];
 	char stack[10000];
@@ -13,11 +12,28 @@ int main() {
 			stack[i] = '(';
 			i++;
 		}
+		else if (all[x] == '{') {
+			stack[i] = '{';
+			i++;
+		}
+		else if (all[x] == '[') {
+			stack[i] = '[';
+			i++;
+		}
 		else {
-			if (!(stack[i - 1] == '(')) {
+			if (all[x] == ')' && !(stack[i - 1] == '(')) {
 				good = 0;
 				break;
 			}
+			else if (all[x] == '}' && !(stack[i - 1] == '{')) {
+				good = 0;
+				break;
+			}
+			else if (all[x] == ']' && !(stack[i - 1] == '[')) {
+				good = 0;
+				break;
+			}
+			
 			else i--;
 		}
 	}
